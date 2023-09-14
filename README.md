@@ -15,3 +15,8 @@ and if user is registered, he can;t go to signup / login page
 !!! Only live image is not implemented yet !!!
 
 ################################
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Additional Features:
+logout handler
+and conditional rendering of login, sign up and logout buttons
