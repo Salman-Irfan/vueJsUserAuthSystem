@@ -3,12 +3,14 @@
     <!-- <router-link to="/login">Login here</router-link> -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark navbar-fixed">
         <div class="container-fluid">
-            <router-link class="navbar-brand text-warning" to="/"
-                >
-                <img src="../../../public/favicon.ico" alt="user logo" width="50">
+            <router-link class="navbar-brand text-warning navHover" to="/">
+                <img
+                    src="../../../public/favicon.ico"
+                    alt="user logo"
+                    width="50"
+                />
                 Vue User Auth System
-                </router-link
-            >
+            </router-link>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -24,7 +26,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <router-link
-                            class="nav-link active"
+                            class="nav-link active navHover"
                             aria-current="page"
                             to="/"
                             >Home</router-link
@@ -32,14 +34,23 @@
                     </li>
                 </ul>
                 <ul class="d-flex">
-                    <router-link to="/login">
+                    <!-- login button -->
+                    <router-link v-if="!userIsLoggedIn" to="/login">
                         <button class="btn btn-outline-success mx-4">
                             Login
                         </button>
                     </router-link>
-                    <router-link to="/sign-up">
-                        <button class="btn btn-success mx-4">
-                            Sign Up
+                    <!-- sign up button -->
+                    <router-link v-if="!userIsLoggedIn" to="/sign-up">
+                        <button class="btn btn-success mx-4">Sign Up</button>
+                    </router-link>
+                    <!-- logout button -->
+                    <router-link v-if="userIsLoggedIn" to="#">
+                        <button
+                            @click="logoutHandler"
+                            class="btn btn-success mx-4"
+                        >
+                            Logout
                         </button>
                     </router-link>
                 </ul>
@@ -51,5 +62,37 @@
 <script>
 export default {
     name: "Navbar",
+    data() {
+        return {
+            userIsLoggedIn: false, // Initialize as false, assuming the user is not logged in initially
+        };
+    },
+    // local storage has data
+    created() {
+        // Check if the userSignUpData exists in local storage
+        const userSignUpData = localStorage.getItem("userSignUpData");
+        if (userSignUpData) {
+            // If it exists, set userIsLoggedIn to true
+            this.userIsLoggedIn = true;
+        }
+    },
+    // methods
+    methods: {
+        logoutHandler() {
+            localStorage.removeItem("userSignUpData");
+            this.userIsLoggedIn = false; // Set userIsLoggedIn to false when logging out
+            this.$router.push("/login");
+        },
+    },
 };
 </script>
+
+<!-- style -->
+<style scoped>
+.navHover:hover {
+    color: blue !important;
+    background-color: aliceblue !important;
+    border-radius: 5%;
+    padding: 3px 5px 3px 5px;
+}
+</style>

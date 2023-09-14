@@ -129,6 +129,13 @@
                 >
                     Capture Live Picture
                 </button>
+                <!-- iframe for live image capture -->
+                <iframe
+                    id="liveImageFrame"
+                    class="form-control"
+                    src="about:blank"
+                    style="display: none"
+                ></iframe>
             </div>
         </div>
         <!-- submit button -->
@@ -166,16 +173,51 @@ export default {
             this.showPassword = !this.showPassword; // Toggle the visibility state
         },
         // image upload
-        handleImageUpload(event) {
-            const file = event.target.files[0];
+        handleImageUpload() {
+            // Handle file upload logic here
+            const file = this.$refs.imageInput.files[0];
             if (file) {
-                // Read the selected image file as a data URL
+                // Handle the selected file
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     this.image = e.target.result; // Store the base64-encoded image data
                 };
                 reader.readAsDataURL(file);
             }
+        },
+        // live camera capture
+        async captureLivePicture() {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: true,
+            });
+            // Display the live stream in an iframe
+            const liveImageFrame = document.getElementById("liveImageFrame");
+            liveImageFrame.srcObject = stream;
+
+            // Capture a frame from the live stream
+            const captureButton = document.getElementById("captureButton");
+            captureButton.disabled = false;
+            // Enable the capture button
+            captureButton.onclick = () => {
+                const canvas = document.createElement("canvas");
+                const context = canvas.getContext("2d");
+                canvas.width = liveImageFrame.videoWidth;
+                canvas.height = liveImageFrame.videoHeight;
+                context.drawImage(
+                    liveImageFrame,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+
+                // Convert the captured frame to a data URL
+                const capturedImage = canvas.toDataURL("image/png");
+                console.log("Captured image:", capturedImage);
+
+                // Release the camera stream
+                stream.getTracks().forEach((track) => track.stop());
+            };
         },
         // signUp
         signUp() {
