@@ -14,6 +14,8 @@ and if user is registered, he can;t go to signup / login page
 
 !!! Only live image is not implemented yet !!!
 
+![Camera Access Blockage](./src/assets/images/cameraMalfunctioning.PNG)
+
 ################################
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>
