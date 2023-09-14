@@ -1,0 +1,13 @@
+{
+    "user": [
+        {
+            "firstName": "Salman",
+            "lastName": "Irfan",
+            "email": "salmanirfan@gmail.com",
+            "password": "password",
+            "address": "streetAddress",
+            "phone": "3234567891",
+            "image": "D:/pic.png"
+        }
+    ]
+}
