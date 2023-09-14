@@ -24,12 +24,31 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- home -->
                     <li class="nav-item">
                         <router-link
                             class="nav-link active navHover"
                             aria-current="page"
                             to="/"
                             >Home</router-link
+                        >
+                    </li>
+                    <!-- add resturant -->
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link active navHover"
+                            aria-current="page"
+                            to="/add-resturant"
+                            >Add Resturant</router-link
+                        >
+                    </li>
+                    <!-- update resturant -->
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link active navHover"
+                            aria-current="page"
+                            to="/update-resturant"
+                            >Update Resturant</router-link
                         >
                     </li>
                 </ul>
@@ -90,9 +109,7 @@ export default {
 <!-- style -->
 <style scoped>
 .navHover:hover {
-    color: blue !important;
+    color: red !important;
     background-color: aliceblue !important;
-    border-radius: 5%;
-    padding: 3px 5px 3px 5px;
 }
 </style>

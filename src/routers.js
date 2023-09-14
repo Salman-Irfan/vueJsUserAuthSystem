@@ -1,7 +1,11 @@
 // import components
 import Home from './components/Home.vue';
+// import user components
 import UserRegistrationForm from "./components/user/UserRegistrationForm.vue";
 import UserLoginForm from "./components/user/UserLoginForm.vue";
+// import resturant components
+import AddResturant from "./components/resturant/AddResturant.vue";
+import UpdateResturant from "./components/resturant/UpdateResturant.vue";
 // import vue-router
 import { createRouter, createWebHistory} from 'vue-router';
 
@@ -24,6 +28,18 @@ const routes = [
         name: "Login",
         component: UserLoginForm,
         path: "/login",
+    },
+    // add resturant route
+    {
+        name: "AddResturant",
+        component: AddResturant,
+        path: "/add-resturant",
+    },
+    // update resturant route
+    {
+        name: "UpdateResturant",
+        component: UpdateResturant,
+        path: "/update-resturant",
     },
 ];
 

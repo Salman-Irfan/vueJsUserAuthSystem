@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-center my-4 px-4">Welcome <span class="bg-dark text-warning"> {{ name }} </span> to the Returant Home Page</h1>
+    <h1 class="text-center my-4 px-4">Welcome <span class="bg-dark text-warning"> {{ name }} </span> to the Resturant Add Page</h1>
 </template>
 
 <!-- script -->
@@ -7,7 +7,7 @@
 <script>
 // import UserRegistrationForm from "./user/UserRegistrationForm.vue";
 export default {
-    name: "Home",
+    name: "AddResturant",
     // to add dynamic user name
     data(){
         return {
