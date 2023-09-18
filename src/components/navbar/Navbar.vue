@@ -9,7 +9,7 @@
                     alt="user logo"
                     width="50"
                 />
-                Vue User Auth System
+                Ecommerce Api Integration
             </router-link>
             <button
                 class="navbar-toggler"
@@ -38,17 +38,8 @@
                         <router-link
                             class="nav-link active navHover"
                             aria-current="page"
-                            to="/add-resturant"
-                            >Add Resturant</router-link
-                        >
-                    </li>
-                    <!-- update resturant -->
-                    <li class="nav-item">
-                        <router-link
-                            class="nav-link active navHover"
-                            aria-current="page"
-                            to="/update-resturant"
-                            >Update Resturant</router-link
+                            to="/ecommerce"
+                            >Ecommerce</router-link
                         >
                     </li>
                 </ul>
@@ -58,10 +49,6 @@
                         <button class="btn btn-outline-success mx-4">
                             Login
                         </button>
-                    </router-link>
-                    <!-- sign up button -->
-                    <router-link v-if="!userIsLoggedIn" to="/sign-up">
-                        <button class="btn btn-success mx-4">Sign Up</button>
                     </router-link>
                     <!-- logout button -->
                     <router-link v-if="userIsLoggedIn" to="#">
@@ -89,7 +76,7 @@ export default {
     // local storage has data
     created() {
         // Check if the userSignUpData exists in local storage
-        const userSignUpData = localStorage.getItem("userSignUpData");
+        const userSignUpData = localStorage.getItem("token");
         if (userSignUpData) {
             // If it exists, set userIsLoggedIn to true
             this.userIsLoggedIn = true;
@@ -98,7 +85,7 @@ export default {
     // methods
     methods: {
         logoutHandler() {
-            localStorage.removeItem("userSignUpData");
+            localStorage.removeItem("token");
             this.userIsLoggedIn = false; // Set userIsLoggedIn to false when logging out
             this.$router.push("/login");
         },

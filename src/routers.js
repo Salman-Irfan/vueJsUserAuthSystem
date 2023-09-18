@@ -1,11 +1,11 @@
 // import components
-import Home from './components/Home.vue';
+import Home from './pages/Home.vue';
 // import user components
-import UserRegistrationForm from "./components/user/UserRegistrationForm.vue";
-import UserLoginForm from "./components/user/UserLoginForm.vue";
-// import resturant components
-import AddResturant from "./components/resturant/AddResturant.vue";
-import UpdateResturant from "./components/resturant/UpdateResturant.vue";
+import UserLoginForm from "./pages/user/UserLoginForm.vue";
+// import products components
+import ProductsPage from "./pages/ecommerce/ProductsPage.vue";
+// Import the ProductDetailsPage component
+import ProductDetailsPage from "./pages/ecommerce/ProductDetailsPage.vue";
 // import vue-router
 import { createRouter, createWebHistory} from 'vue-router';
 
@@ -17,29 +17,23 @@ const routes = [
         component: Home,
         path: "/",
     },
-    // sign up route
-    {
-        name: "SignUp",
-        component: UserRegistrationForm,
-        path: "/sign-up",
-    },
     // login route
     {
         name: "Login",
         component: UserLoginForm,
         path: "/login",
     },
-    // add resturant route
+    // display products route
     {
-        name: "AddResturant",
-        component: AddResturant,
-        path: "/add-resturant",
+        name: "ProductsPage",
+        component: ProductsPage,
+        path: "/ecommerce",
     },
-    // update resturant route
+    // Add a new route for the product details page
     {
-        name: "UpdateResturant",
-        component: UpdateResturant,
-        path: "/update-resturant",
+        name: "ProductDetails",
+        component: ProductDetailsPage,
+        path: "/ecommerce/product/:id", // :id is a dynamic segment to capture the product ID
     },
 ];
 

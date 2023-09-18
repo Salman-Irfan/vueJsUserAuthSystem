@@ -1,19 +1,19 @@
 <template>
     <!-- bootstrp form -->
-    <form v-on:submit="login" class="bg-dark text-white my-4 py-4 px-4">
+    <form @submit.prevent="login" class="bg-dark text-white my-4 py-4 px-4">
         <h4 class="text-center text-warning container">User Login</h4>
-        <!-- email -->
+        <!-- userName -->
         <div class="container mb-3">
-            <!-- email -->
-            <label for="email" class="form-label">Email</label>
-            <!-- Email input -->
+            <!-- userName -->
+            <label for="userName" class="form-label">User Name</label>
+            <!-- userName input -->
             <input
-                type="email"
+                type="text"
                 class="form-control"
-                id="email"
-                placeholder="Email"
-                name="email"
-                v-model="email"
+                id="userName"
+                placeholder="User Name"
+                name="userName"
+                v-model="userName"
                 required
             />
         </div>
@@ -39,12 +39,11 @@
                     {{ showPassword ? "Hide" : "Show" }}
                 </button>
             </div>
+            <button type="submit" class="btn btn-success form-control mt-4">Login</button>
         </div>
         <!-- submit button -->
-        <button type="submit" class="container btn btn-success">Login</button>
         <h5 class="text-center">
             Don't have an account.
-            <router-link to="/sign-up">Register here</router-link>
         </h5>
     </form>
 </template>
@@ -56,7 +55,7 @@ export default {
     // data
     data() {
         return {
-            email: "",
+            userName: "",
             password: "",
             showPassword: false, // Initially, password is hidden
         };
@@ -71,37 +70,29 @@ export default {
         login() {
             // Store form values
             const userLoginData = {
-                email: this.email,
+                userName: this.userName,
                 password: this.password,
             };
-            // destructuring the login data
-            const { email, password } = userLoginData;
+            // destructing userName and password
+            const { userName, password } = userLoginData;
+            console.log(userName, password);
+            // Check if the provided username and password match
+            if (this.userName === "kminchelle" && this.password === "0lelplR") {
+                // If the match is successful, save the predefined token in local storage
+                const token =
+                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInVzZXJuYW1lIjoia21pbmNoZWxsZSIsImVtYWlsIjoia21pbmNoZWxsZUBxcS5jb20iLCJmaXJzdE5hbWUiOiJKZWFubmUiLCJsYXN0TmFtZSI6IkhhbHZvcnNvbiIsImdlbmRlciI6ImZlbWFsZSIsImltYWdlIjoiaHR0cHM6Ly9yb2JvaGFzaC5vcmcvYXV0cXVpYXV0LnBuZz9zaXplPTUweDUwJnNldD1zZXQxIiwiaWF0IjoxNjM1NzczOTYyLCJleHAiOjE2MzU3Nzc1NjJ9.n9PQX8w8ocKo0dMCw3g8bKhjB8Wo7f7IONFBDqfxKhs";
+                localStorage.setItem("token", token);
 
-            // get userSignUpData from local storage
-            const userSignUpData = JSON.parse(
-                localStorage.getItem("userSignUpData")
-            );
-
-            // if email, && password same from local storage
-            if (
-                email === userSignUpData.email &&
-                password === userSignUpData.password
-            ) {
+                // Redirect to the home page
                 this.$router.push("/");
             } else {
-                alert("Invalid email or password");
-            }
-            let user = localStorage.getItem("userSignUpData");
-
-            // if user exists, redirected to home page
-            if (user) {
-                this.$router.push("/");
+                alert("Login failed. Invalid username or password.");
             }
         },
     },
     // protected routing, after user sign up, user can't visit sign up page
     mounted() {
-        let user = localStorage.getItem("userSignUpData");
+        let user = localStorage.getItem("token");
 
         // if user exists, redirected to home page
         if (user) {
