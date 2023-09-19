@@ -3,6 +3,7 @@
     <div>
         <!-- utilizing Navbar compoennt-->
         <Navbar />
+        
         <!-- router - view -->
         <router-view />
     </div>

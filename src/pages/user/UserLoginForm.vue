@@ -41,10 +41,6 @@
             </div>
             <button type="submit" class="btn btn-success form-control mt-4">Login</button>
         </div>
-        <!-- submit button -->
-        <h5 class="text-center">
-            Don't have an account.
-        </h5>
     </form>
 </template>
 

@@ -4,44 +4,78 @@
         <h1 class="text-center my-4 px-4">Welcome to Ecommerce Page</h1>
         <div class="container mt-4 py-4 px-4">
             <!-- Search Input -->
-            <div class="mb-4">
+            <div class="mb-3 input-group">
                 <input
                     type="text"
                     class="form-control"
                     placeholder="Search for products"
                     v-model="searchQuery"
                 />
-                <button class="btn btn-primary mt-2" @click="searchProducts">
+                <button class="btn btn-primary" @click="searchProducts">
                     Search
                 </button>
             </div>
             <!-- products table -->
             <h2 class="text-center my-4 px-4">Products</h2>
             <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Category</th>
-                        <th>Product Details</th>
+                <thead >
+                    <tr >
+                        <th class="bg-primary">Id</th>
+                        <th class="bg-primary">Title</th>
+                        <th class="bg-primary">Description</th>
+                        <th class="bg-primary">Price</th>
+                        <th class="bg-primary">Category</th>
+                        <th class="bg-primary">Product Details</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="product in filteredProducts" :key="product.id">
+                        <td>{{ product.id }}</td>
                         <td>{{ product.title }}</td>
                         <td>{{ product.description }}</td>
                         <td>${{ product.price }}</td>
                         <td>{{ product.category }}</td>
+                        <!-- action buttons -->
                         <td>
-                            <!-- Link to display product details -->
-                            <router-link :to="'/ecommerce/product/' + product.id"
-                                >Details</router-link
-                            >
+                            <!-- Center-aligned Details link above Update and Delete buttons -->
+                            <div class="text-center">
+                                <router-link
+                                    :to="'/ecommerce/product/' + product.id"
+                                    class="btn btn-primary mb-3 form-control"
+                                >
+                                    Details
+                                </router-link>
+                            </div>
+
+                            <!-- Horizontally aligned Update and Delete buttons -->
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-success mx-2">
+                                    Update
+                                </button>
+                                <button class="btn btn-danger">Delete</button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <!-- pagination -->
+            <div class="pagination">
+                <button
+                    @click="previousPage"
+                    type="button"
+                    :disabled="currentPage === 1"
+                >
+                    Previous
+                </button>
+                <span>{{ currentPage }} of {{ totalPage }}</span>
+                <button
+                    @click="nextPage"
+                    type="buton"
+                    :disabled="currentPage === totalPage"
+                >
+                    Next
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -53,6 +87,8 @@ export default {
         return {
             products: [], // Initialize an empty array to store the products
             searchQuery: "", // Store the user's search query
+            currentPage: 1, // Current page number
+            pageSize: 10, // Number of items per page
         };
     },
     computed: {
@@ -67,10 +103,11 @@ export default {
             );
         },
     },
-
+    // total pages
+    
     mounted() {
+        // protected routing
         let user = localStorage.getItem("token");
-
         if (!user) {
             this.$router.push("/login");
         } else {
@@ -87,9 +124,8 @@ export default {
         }
     },
     methods: {
+        // search the product
         searchProducts() {
-            // You can add code here to fetch filtered products based on the searchQuery
-            // For example, you can make a new API request with the search query
             fetch(`https://dummyjson.com/products/search?q=${this.searchQuery}`)
                 .then((res) => res.json())
                 .then((data) => {
@@ -102,6 +138,18 @@ export default {
                         error
                     );
                 });
+        },
+        // previous page
+        previousPage() {
+            if (this.currentPage > 1) {
+                this.currentPage -= 1;
+            }
+        },
+        // next page
+        nextPage() {
+            if (this.currentPage < this.totalPage) {
+                this.currentPage += 1;
+            }
         },
     },
 };

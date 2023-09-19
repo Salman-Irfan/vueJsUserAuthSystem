@@ -6,6 +6,8 @@ import UserLoginForm from "./pages/user/UserLoginForm.vue";
 import ProductsPage from "./pages/ecommerce/ProductsPage.vue";
 // Import the ProductDetailsPage component
 import ProductDetailsPage from "./pages/ecommerce/ProductDetailsPage.vue";
+// Import the AddProductPage component
+import AddProductPage from "./pages/ecommerce/AddProductPage.vue";
 // import vue-router
 import { createRouter, createWebHistory} from 'vue-router';
 
@@ -34,6 +36,12 @@ const routes = [
         name: "ProductDetails",
         component: ProductDetailsPage,
         path: "/ecommerce/product/:id", // :id is a dynamic segment to capture the product ID
+    },
+    // Add a new route for the product details page
+    {
+        name: "AddProductPage",
+        component: AddProductPage,
+        path: "/addproduct", // :id is a dynamic segment to capture the product ID
     },
 ];
 

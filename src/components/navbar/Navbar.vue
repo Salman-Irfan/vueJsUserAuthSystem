@@ -33,13 +33,22 @@
                             >Home</router-link
                         >
                     </li>
-                    <!-- add resturant -->
+                    <!-- products -->
                     <li class="nav-item">
                         <router-link
                             class="nav-link active navHover"
                             aria-current="page"
                             to="/ecommerce"
                             >Ecommerce</router-link
+                        >
+                    </li>
+                    <!-- add product -->
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link active navHover"
+                            aria-current="page"
+                            to="/addproduct"
+                            >Add Product</router-link
                         >
                     </li>
                 </ul>
